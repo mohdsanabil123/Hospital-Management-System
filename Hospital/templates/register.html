@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Registration{% endblock title %}
+
+{% block nav %}
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                        <a href="{% url 'price' %}" class="nav-item nav-link">Pricing</a>
+                        {% if user.is_authenticated %}
+                        <p class="nav-item nav-link">Hello, {{user.first_name}}</p>
+                        <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+
+                        {% else %}
+                        <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
+                        <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                        
+                        {% endif %}
+
+                    </div>
+{% endblock nav %}
+    
+{% block content %}
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="container-fluid pt-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                <h1 class="d-inline-block text-primary text-uppercase border-bottom border-5">Registration</h1>
+                
+                {% for message in messages %}
+                <h3 class="d-inline-block text-primary border-5">{{message}}</h3>
+                {% endfor %}
+            </div>
+            <div class="container-fluid pt-5"><h1><br></h1>
+            <div class="row justify-content-center position-relative" style="margin-top: -200px; z-index: 1;">
+                <div class="col-lg-8">
+                    <div class="bg-white rounded p-5 m-5 mb-0">
+                        <form action="register" method="post">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="First Name" name="first_name" style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Last Name" name="last_name" style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="email" class="form-control bg-light border-0" placeholder="Email" name="email" style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Username" name="username" style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="password" class="form-control bg-light border-0" placeholder="Password" name="password1" style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input type="password" class="form-control bg-light border-0" placeholder="Confirm Password" name="password2" style="height: 55px;">
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+{% endblock content %}
